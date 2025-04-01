@@ -123,7 +123,7 @@ cp .tmux/.tmux.conf.local .
 mv .tmux.conf.local .tmux.conf.local.bak
 git clone https://github.com/KHAOS5/New-VM-Setup.git
 mv New-VM-Setup/tmux.local.conf /home/kali/.tmux.conf.local
-mv .zshrc ./zshrc.bak
+mv .zshrc ./.zshrc.bak
 mv New-VM-Setup/zshrc /home/kali/.zshrc
 git clone https://github.com/powerline/fonts.git --depth=1
 cd fonts
