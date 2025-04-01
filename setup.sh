@@ -29,9 +29,7 @@ cd /home/kali/transfer
 echo 
 echo "PimpMyKali setup is complete. Continuing...."
 echo 
-echo "Installing feroxbuster"
-sudo apt install feroxbuster
-echo  "feroxbuster Installed. Setting up Home Directory...."
+echo  "Setting up Home Directory...."
 cd /home/kali/
 rm -rf Music Pictures Public Templates Videos
 mkdir ctf
