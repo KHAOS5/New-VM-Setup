@@ -13,3 +13,7 @@ The purpose of this repo is to set up a new kali linux virtual machine to my pre
 
 ### Terminal Settings 
 ![image](https://github.com/user-attachments/assets/08fb6af2-88cf-4279-86db-aa892ce25315)
+
+
+### Final look in tmux 
+![image](https://github.com/user-attachments/assets/e22d0317-b486-463a-88ad-250f5a1c6dcf)
