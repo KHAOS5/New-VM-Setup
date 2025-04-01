@@ -4,8 +4,8 @@
 cd /opt || { echo "Failed to change directory to /opt"; exit 1; }
 
 # Give execution permissions to the script
-sudo chmod +x pimpmykali.sh
-sudo ./pimpmykali.sh
+sudo chmod +x /home/kali/New-VM-Setup/pimpmykali.sh
+sudo /home/kali/New-VM-Setup/pimpmykali.sh
 
 sudo chmod +x /home/kali/New-VM-Setup/detect.exp 
 sudo /home/kali/New-VM-Setup/detect.exp 
