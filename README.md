@@ -7,3 +7,6 @@ The purpose of this repo is to set up a new kali linux virtual machine to my pre
 `cd New-VM-Setup`\
 `chmod +x setup.sh`\
 `sudo ./setup.sh`
+
+### To set up the background 
+`mv khaos.png /usr/share/backgrounds/kali-16x9/`
