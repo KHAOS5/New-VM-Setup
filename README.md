@@ -6,4 +6,4 @@ The purpose of this repo is to set up a new kali linux virtual machine to my pre
 `git clone https://github.com/KHAOS5/New-VM-Setup.git `\
 `cd New-VM-Setup`\
 `chmod +x setup.sh`\
-`sudo ./setup.sh`\
+`sudo ./setup.sh`
