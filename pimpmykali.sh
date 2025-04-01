@@ -293,6 +293,7 @@ fix_missing() {
     fix_ssh_widecompat
     fix_waybackurls
     fix_dockercompose
+    fix_ghidra
     fix_locate
     fix_seclists
     fix_flameshot
@@ -2065,6 +2066,96 @@ peh_weblab_setup() {
         fi 
       fi 
     }
+
+
+fix_ghidra() {
+    is_installed "jq curl"
+    LATEST_URL="https://api.github.com/repos/NationalSecurityAgency/ghidra/releases/latest"
+    JSON_DATA=$(curl -s "${LATEST_URL}")
+    # DOWNLOAD_URL=$(echo "$JSON_DATA" | jq -r '.assets[] | select(.name | test("ghidra_[0-9]+\\.[0-9]+\\.[0-9]+_PUBLIC_[0-9]{8}\\.zip")) | .browser_download_url')
+    DOWNLOAD_URL=$(echo "$JSON_DATA" | grep -i "browser_download_url" |  awk {'print $2'} | tr -d \")
+    GHIDRA_INSTALL_DIR="/opt/ghidra"
+    GHIDRA_TMP_ZIP="/tmp/ghidra.zip"
+    GHIDRA_TMP_DIR=$(mktemp -d)
+    GHIDRA_SYMLINK="/usr/local/bin/ghidra"
+    DESKTOP_FILE="/usr/share/applications/ghidra.desktop"
+    EXEC_PATH="${GHIDRA_INSTALL_DIR}/ghidraRun"
+    ICON_PATH="${GHIDRA_INSTALL_DIR}/docs/images/GHIDRA_1.png"
+    DARK_THEME_URL="https://github.com/zackelia/ghidra-dark-theme"
+
+    echo -e "\n  ${greenplus} Ghidra Setup "
+    
+    # check for current ghidra installation, uninstall if found
+    is_installed_remove "ghidra ghidra-data"
+    
+    # install dependencies 
+    is_installed "openjdk-23-jdk"
+    
+    [ -f ${GHIDRA_TMP_ZIP} ] && rm -f ${GHIDRA_TMP_ZIP}
+
+    [ -d ${GHIDRA_INSTALL_DIR} ] && rm -rf ${GHIDRA_INSTALL_DIR}
+    [ ! -d ${GHIDRA_INSTALL_DIR} ] && mkdir ${GHIDRA_INSTALL_DIR}
+
+    echo -e "${spaces}${greenplus} Downloading Ghidra"
+    wget -q "${WGET_STATUS} " "${DOWNLOAD_URL}" -O "${GHIDRA_TMP_ZIP}"
+    
+    echo -e "${spaces}${greenplus} Unzipping Ghidra to ${GHIDRA_TMP_DIR}"
+    unzip -qq -o "${GHIDRA_TMP_ZIP}" -d "${GHIDRA_TMP_DIR}"
+
+    echo -e "${spaces}${greenplus} Moving Ghidra from ${GHIDRA_TMP_DIR} to ${GHIDRA_INSTALL_DIR}"
+    mv "${GHIDRA_TMP_DIR}"/ghidra_*/* "${GHIDRA_INSTALL_DIR}"
+
+    # create symbolic link in $PATH
+    echo -e "${spaces}${greenplus} Creating Ghidra Symlink ${GHIDRA_SYMLINK}"
+    [ -f "${GHIDRA_INSTALL_DIR}"/ghidraRun ] && ln -sf "${GHIDRA_INSTALL_DIR}"/ghidraRun "${GHIDRA_SYMLINK}"
+    chmod +x /usr/local/bin/ghidra
+
+    # create .desktop file
+    echo -e "${spaces}${greenplus} Creating .desktop file ${DESKTOP_FILE}"
+
+    # .desktop file /usr/share/applications/ghidra.desktop
+    echo -e "[Desktop Entry]" > ${DESKTOP_FILE}
+    echo -e "Version=1.0" >> ${DESKTOP_FILE}
+    echo -e "Name=Ghidra" >> ${DESKTOP_FILE}
+    echo -e "Comment=Open-source reverse engineering tool" >> ${DESKTOP_FILE}
+    echo -e "Exec=${EXEC_PATH}" >> ${DESKTOP_FILE}
+    echo -e "Icon=${ICON_PATH}" >> ${DESKTOP_FILE}
+    echo -e "Terminal=false" >> ${DESKTOP_FILE}
+    echo -e "Type=Application" >> ${DESKTOP_FILE}
+    echo -e "Categories=Development;ReverseEngineering;" >> ${DESKTOP_FILE}
+
+    chmod +x "$DESKTOP_FILE"
+
+    echo -e "${spaces}${greenplus} Ghidra added to the XFCE menu."
+
+    # Ghidra Dark Theme (optional quality of life improvement)
+    GHIDRA_DARK_THEME_INSTALL_DIR="/opt/ghidra-dark-theme"
+    [ -d ${GHIDRA_DARK_THEME_INSTALL_DIR} ] && rm -rf ${GHIDRA_DARK_THEME_INSTALL_DIR}
+
+    echo -e "${spaces}${greenplus} Cloning Ghidra Dark Theme ${DARK_THEME_URL}"
+    echo -e "\n            To install the dark theme, Open Ghidra and Click Edit/Themes/Import"
+    echo -e "            browse to ${GHIDRA_DARK_THEME_INSTALL_DIR} double click on the .theme file\n"
+  
+    # clone ghidra dark-theme
+    git clone ${DARK_THEME_URL} ${GHIDRA_DARK_THEME_INSTALL_DIR} > /dev/null 2>&1 
+  
+    # Cleanup
+    echo -e "${spaces}${greenplus} Cleaning up ${GHIDRA_TMP_ZIP}"
+    rm -f ${GHIDRA_TMP_ZIP}
+    echo -e "${spaces}${greenplus} Cleaning up ${GHIDRA_TMP_DIR}"
+    rm -rf ${GHIDRA_TMP_DIR}
+
+    echo -e "${spaces}${greenplus} Ghidra Setup Complete"
+    }
+
+
+iot_course_setup() {
+    SASQUATCH_URL="https://github.com/devttys0/sasquatch"
+    SASQUATCH_PATCH_URL="https://github.com/devttys0/sasquatch/files/7776843/M1-Kali.patch.txt"
+    CLONE_DIR="/opt/sasquatch"
+    PATCH_DIR="/opt/sasquatch/patches"
+    PATCH_FILE="M1-Kali.patch.txt"
+    INSTALLED_BIN="/usr/local/bin/sasquatch"
  
     # rev 1.8.1a IoT Course setup requirements
     echo -e "\n  ${greenplus} IoT and Hardware Hacking Course Setup"
@@ -2106,6 +2197,7 @@ peh_weblab_setup() {
     check_exit_status ${APP} ${FUNCTYPE} ${EXIT_STATUS}
     clean_vars
 
+    fix_ghidra
 
     echo -e "${spaces}${greenplus} IoT Course Setup Complete"
     }
