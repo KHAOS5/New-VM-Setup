@@ -4,7 +4,9 @@
 set timeout 5
 
 # Start the PimpMyKali script with sudo
-spawn /home/kali/New-VM-Setup/pimpmykali.sh
+spawn sudo /home/kali/New-VM-Setup/pimpmykali.sh
+expect "[sudo] password for kali:"
+send "kali"
 
 # Expect the prompt that asks about a new VM setup
 expect "N - NEW VM SETUP - Run this option if this is the first time running pimpmykali"
