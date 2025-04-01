@@ -130,9 +130,7 @@ cd fonts
 ./install.sh
 cd ..
 rm -rf fonts
-
-
-echo "Everything is set up! Happy Hacking!"
+mv /home/kali/New-VM-Setup /home/kali/.New-VM-Setup
 echo 
 echo "Fixing VMware Tools...." 
 sudo apt update && sudo apt install -y --reinstall open-vm-tools-desktop fuse 
@@ -149,6 +147,7 @@ sleep 1
 echo "2"
 sleep 1
 echo "1"
+echo "Everything is set up! Happy Hacking!"
 echo "REBOOTING!"
 sleep 0.5
 sudo reboot 
