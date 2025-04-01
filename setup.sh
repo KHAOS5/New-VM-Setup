@@ -24,17 +24,6 @@ mkdir courses
 cd ctf && mkdir htb && mkdir pg && mkdir thm && mkdir vulnhub && mkdir vulnlab  
 cd /home/kali/transfer 
 echo 
-echo "PimpMyKali setup is complete. Continuing...."
-echo 
-echo  "Setting up Home Directory...."
-cd /home/kali/
-rm -rf Music Pictures Public Templates Videos
-mkdir ctf
-mkdir tools
-mkdir transfer
-mkdir courses
-cd ctf && mkdir htb && mkdir pg && mkdir thm && mkdir vulnhub && mkdir vulnlab  
-cd /home/kali/transfer 
 echo "Downloading useful Scripts/Tools into transfer directory" 
 # winpeas
 wget https://github.com/peass-ng/PEASS-ng/releases/download/20250330-9284b167/winPEASx64.exe
