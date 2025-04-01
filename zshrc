@@ -264,9 +264,6 @@ function dockershellshhere() {
 	        sudo docker run --rm -it --entrypoint=/bin/sh -v `pwd`:/${dirname} -w /${dirname} "$@"
 	}
 
-
-/usr/bin/neofetch --color_blocks off --ascii_colors 1 7 --colors 88 7 7 7 7 196
-
 # Created by `pipx` on 2021-11-30 20:49:06
 export PATH="$PATH:/home/kali/.local/bin"
 
