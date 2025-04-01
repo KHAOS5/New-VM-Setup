@@ -3,13 +3,6 @@
 # Move to /opt directory
 cd /opt || { echo "Failed to change directory to /opt"; exit 1; }
 
-# Clone PimpMyKali repository
-echo "[*] Cloning PimpMyKali..."
-sudo git clone https://github.com/KHAOS5/New-VM-Setup.git || { echo "Failed to clone repository"; exit 1; }
-
-# Move into New-VM-Setup
-cd New-VM-Setup
-
 # Give execution permissions to the script
 sudo chmod +x pimpmykali.sh
 
