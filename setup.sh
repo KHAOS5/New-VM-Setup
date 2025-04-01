@@ -14,10 +14,7 @@ sudo tail /f /home/kali/New-VM-Setup/pimpmykali.log | grep -m 1 "All Done! Happy
 echo
 # Once found continue 
 echo "PimpMyKali setup is complete. Continuing...."
-echo
-echo "Installing feroxbuster" 
-sudo apt install feroxbuster
-echo  "feroxbuster Installed. Setting up Home Directory...."
+echo "Setting up Home Directory...."
 cd /home/kali/
 rm -rf Music Pictures Public Templates Videos
 mkdir ctf 
