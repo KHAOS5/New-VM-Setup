@@ -4,13 +4,13 @@
 cd /opt || { echo "Failed to change directory to /opt"; exit 1; }
 
 # Give execution permissions to the script
-sudo chmod +x /home/kali/New-VM-Setup/pimpmykali.sh
+chmod +x /home/kali/New-VM-Setup/pimpmykali.sh
 
-sudo chmod +x /home/kali/New-VM-Setup/detect.exp 
-sudo /home/kali/New-VM-Setup/detect.exp 
+chmod +x /home/kali/New-VM-Setup/detect.exp 
+/home/kali/New-VM-Setup/detect.exp 
 
 # Wait for pimpmykali to finish and look for the specific message from the output 
-sudo tail /f /home/kali/New-VM-Setup/pimpmykali.log | grep -m 1 "All Done! Happy Hacking!"
+tail /f /home/kali/New-VM-Setup/pimpmykali.log | grep -m 1 "All Done! Happy Hacking!"
 echo
 # Once found continue 
 echo "PimpMyKali setup is complete. Continuing...."
