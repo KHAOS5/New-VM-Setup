@@ -16,4 +16,4 @@ The purpose of this repo is to set up a new kali linux virtual machine to my pre
 
 
 ### Final look in tmux 
-![image](https://github.com/user-attachments/assets/e22d0317-b486-463a-88ad-250f5a1c6dcf)
+![image](https://github.com/user-attachments/assets/2da9a9e1-df94-4b15-9cea-9f48084a1d90)
