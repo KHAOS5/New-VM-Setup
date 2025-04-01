@@ -1,0 +1,16 @@
+#!/usr/bin/expect -f
+
+# Set a timeout (adjust as needed)
+set timeout 5
+
+# Start the PimpMyKali script with sudo
+spawn sudo ./pimpmykali.sh
+
+# Expect the prompt that asks about a new VM setup
+expect "N - NEW VM SETUP - Run this option if this is the first time running pimpmykali"
+send "N\r"
+expect "Menu selection is N press Y or N to confirm:"
+send "Y\r"
+
+# Continue with the script execution
+interact
